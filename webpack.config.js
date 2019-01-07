@@ -1,6 +1,10 @@
 const path = require('path')
 const HWP = require('html-webpack-plugin')
 
+const htmlWebpackPlugin = new HWP({
+  template: path.join(__dirname, '/src/index.html')
+})
+
 module.exports = {
   entry: path.join(__dirname, '/src/index.js'),
   output: {
@@ -13,12 +17,12 @@ module.exports = {
         test: /\.js$/,
         exclude: /node_modules/,
         loader: 'babel-loader'
+      },
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader']
       }
     ]
   },
-  plugins: [
-    new HWP({
-      template: path.join(__dirname, '/src/index.html')
-    })
-  ]
+  plugins: [htmlWebPackPlugin]
 }
